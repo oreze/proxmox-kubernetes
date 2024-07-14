@@ -13,11 +13,11 @@ registry_enabled: false
 # registry_disk_size: "10Gi"
 
 # Metrics Server deployment
-metrics_server_enabled: false
-# metrics_server_container_port: 4443
-# metrics_server_kubelet_insecure_tls: true
-# metrics_server_metric_resolution: 15s
-# metrics_server_kubelet_preferred_address_types: "InternalIP,ExternalIP,Hostname"
+metrics_server_enabled: true
+metrics_server_container_port: 4443
+metrics_server_kubelet_insecure_tls: true
+metrics_server_metric_resolution: 15s
+metrics_server_kubelet_preferred_address_types: "InternalIP,ExternalIP,Hostname"
 
 # Rancher Local Path Provisioner
 local_path_provisioner_enabled: false
@@ -160,8 +160,59 @@ cert_manager_enabled: false
 # cert_manager_leader_election_namespace: kube-system
 
 # MetalLB deployment
-metallb_enabled: false
+# MetalLB deployment
+metallb_enabled: true
 metallb_speaker_enabled: true
+metallb_namespace: kube-system
+metallb_config:
+  address_pools:
+    primary:
+      ip_range:
+        - 10.5.0.0/16
+      auto_assign: true
+      avoid_buggy_ips: true
+    pool1:
+      ip_range:
+        - 10.6.0.0/16
+      auto_assign: true
+      avoid_buggy_ips: true
+    pool2:
+      ip_range:
+        - 10.10.0.0/16
+      auto_assign: true
+      avoid_buggy_ips: true
+  layer2:
+    - primary
+  layer3:
+    defaults:
+      peer_port: 179
+      hold_time: 120s
+    communities:
+      vpn-only: "1234:1"
+    metallb_peers:
+      peer1:
+        peer_address: 10.6.0.1
+        peer_asn: 64512
+        my_asn: 4200000000
+        communities:
+          - vpn-only
+        address_pool:
+          - pool1
+      peer2:
+        peer_address: 10.10.0.1
+        peer_asn: 64513
+        my_asn: 4200000000
+        communities:
+          - no-advertise
+        address_pool:
+          - pool2
+calico_advertise_service_loadbalancer_ips: 
+  - "{{ metallb_config.address_pools.primary.ip_range }}"
+  - "{{ metallb_config.address_pools.pool1.ip_range }}"
+  - "{{ metallb_config.address_pools.pool2.ip_range }}"
+  # - 10.5.0.0/16
+  # - 10.6.0.0/16
+  # - 10.10.0.0/16
 # metallb_ip_range:
 #   - "10.5.0.50-10.5.0.99"
 # metallb_pool_name: "loadbalanced"
