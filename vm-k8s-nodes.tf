@@ -1,6 +1,7 @@
 module "k8s_control_plane_nodes" {
   source = "./modules/proxmox_ubuntu_vm"
-
+  
+  vm_net_mtu                   = var.internal_net_mtu
   node_count                   = var.vm_k8s_control_plane["node_count"]
   pm_host                      = var.pm_host
   vm_ubuntu_tmpl_name          = var.vm_ubuntu_tmpl_name
@@ -24,6 +25,7 @@ module "k8s_control_plane_nodes" {
 module "k8s_worker_nodes" {
   source = "./modules/proxmox_ubuntu_vm"
 
+  vm_net_mtu                   = var.internal_net_mtu
   node_count                    = var.vm_k8s_worker["node_count"]
   pm_host                       = var.pm_host
   vm_ubuntu_tmpl_name           = var.vm_ubuntu_tmpl_name

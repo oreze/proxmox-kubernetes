@@ -53,6 +53,7 @@ locals {
 module "kubespray_host" {
   source = "./modules/proxmox_ubuntu_vm"
 
+  vm_net_mtu                   = var.internal_net_mtu
   node_count                   = var.create_kubespray_host ? 1 : 0
   pm_host                      = var.pm_host
   vm_ubuntu_tmpl_name          = var.vm_ubuntu_tmpl_name
