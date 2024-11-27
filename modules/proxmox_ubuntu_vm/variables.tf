@@ -26,7 +26,8 @@ variable "vm_net_name" {
 
 variable "vm_net_mtu" {
   type        = string
-  description = "The MTU to use on the interface"  
+  description = "The MTU to use on the interface"
+  default     = null
 }
 
 variable "vm_net_subnet_cidr" {
