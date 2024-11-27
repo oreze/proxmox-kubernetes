@@ -1,7 +1,6 @@
 module "k8s_control_plane_nodes" {
   source = "./modules/proxmox_ubuntu_vm"
   
-  vm_net_mtu                   = var.internal_net_mtu
   node_count                   = var.vm_k8s_control_plane["node_count"]
   pm_host                      = var.pm_host
   vm_ubuntu_tmpl_name          = var.vm_ubuntu_tmpl_name
@@ -14,6 +13,7 @@ module "k8s_control_plane_nodes" {
   vm_os_disk_storage           = var.vm_os_disk_storage
   vm_os_disk_size_gb           = var.vm_k8s_control_plane["disk_size"]
   vm_net_name                  = var.internal_net_name
+  vm_net_mtu                   = var.internal_net_mtu
   vm_net_subnet_cidr           = var.internal_net_subnet_cidr
   vm_host_number               = 10
   vm_user                      = var.vm_user
@@ -25,7 +25,6 @@ module "k8s_control_plane_nodes" {
 module "k8s_worker_nodes" {
   source = "./modules/proxmox_ubuntu_vm"
 
-  vm_net_mtu                   = var.internal_net_mtu
   node_count                    = var.vm_k8s_worker["node_count"]
   pm_host                       = var.pm_host
   vm_ubuntu_tmpl_name           = var.vm_ubuntu_tmpl_name
@@ -38,6 +37,7 @@ module "k8s_worker_nodes" {
   vm_os_disk_storage            = var.vm_os_disk_storage
   vm_os_disk_size_gb            = var.vm_k8s_worker["disk_size"]
   vm_net_name                   = var.internal_net_name
+  vm_net_mtu                    = var.internal_net_mtu
   vm_net_subnet_cidr            = var.internal_net_subnet_cidr
   vm_host_number                = 20
   vm_user                       = var.vm_user

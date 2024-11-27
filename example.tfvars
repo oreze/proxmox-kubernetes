@@ -25,6 +25,8 @@ pm_timeout          = 600
 ########################################################################
 # Kubernetes internal network
 internal_net_name = "vmbr1"
+# Internal network MTU (you only need to change this when mtu is different from the default host settings)
+#internal_net_mtu = 1500
 # Internal network CIDR
 internal_net_subnet_cidr = "10.0.1.0/24"
 # Base64 encoded keys for Kubernetes admin authentication

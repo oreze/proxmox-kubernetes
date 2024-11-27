@@ -53,7 +53,6 @@ locals {
 module "kubespray_host" {
   source = "./modules/proxmox_ubuntu_vm"
 
-  vm_net_mtu                   = var.internal_net_mtu
   node_count                   = var.create_kubespray_host ? 1 : 0
   pm_host                      = var.pm_host
   vm_ubuntu_tmpl_name          = var.vm_ubuntu_tmpl_name
@@ -66,6 +65,7 @@ module "kubespray_host" {
   vm_os_disk_storage           = var.vm_os_disk_storage
   vm_os_disk_size_gb           = 10
   vm_net_name                  = var.internal_net_name
+  vm_net_mtu                   = var.internal_net_mtu
   vm_net_subnet_cidr           = var.internal_net_subnet_cidr
   vm_host_number               = 5
   vm_user                      = var.vm_user
