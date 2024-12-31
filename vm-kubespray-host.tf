@@ -65,6 +65,7 @@ module "kubespray_host" {
   vm_os_disk_storage           = var.vm_os_disk_storage
   vm_os_disk_size_gb           = 10
   vm_net_name                  = var.internal_net_name
+  vm_net_mtu                   = var.internal_net_mtu
   vm_net_subnet_cidr           = var.internal_net_subnet_cidr
   vm_host_number               = 5
   vm_user                      = var.vm_user

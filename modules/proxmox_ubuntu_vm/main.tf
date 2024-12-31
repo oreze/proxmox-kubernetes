@@ -64,6 +64,7 @@ resource "proxmox_vm_qemu" "ubuntu_vm" {
   network {
     model  = "virtio"
     bridge = var.vm_net_name
+    mtu = var.vm_net_mtu
   }
 
   ipconfig0 = "ip=${cidrhost(var.vm_net_subnet_cidr, var.vm_host_number + count.index)}${local.vm_net_subnet_mask},gw=${local.vm_net_default_gw}"

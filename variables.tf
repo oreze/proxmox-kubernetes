@@ -79,6 +79,12 @@ variable "internal_net_name" {
   default     = "vmbr1"
 }
 
+variable "internal_net_mtu" {
+  type        = string
+  description = "The mtu to use for the internal network"
+  default     = null
+}
+
 variable "internal_net_subnet_cidr" {
   type        = string
   description = "CIDR of the internal network"

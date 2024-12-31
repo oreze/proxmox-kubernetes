@@ -24,6 +24,12 @@ variable "vm_net_name" {
   description = ""
 }
 
+variable "vm_net_mtu" {
+  type        = string
+  description = "The MTU to use on the interface"
+  default     = null
+}
+
 variable "vm_net_subnet_cidr" {
   type        = string
   description = "Address prefix for the internal network"
